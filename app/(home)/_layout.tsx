@@ -6,7 +6,7 @@ export default function HomeLayout() {
     <Stack screenOptions={{
       contentStyle: { backgroundColor: COLORS.white },
     }}>
-      <Stack.Screen name="index" options={{ title: 'Home', headerLargeTitleEnabled: true, headerLargeTitleShadowVisible: false }} />
+      <Stack.Screen name="index" options={{ title: 'Home', headerLargeTitleEnabled: true, headerTransparent: true, }} />
     </Stack>
   );
 }

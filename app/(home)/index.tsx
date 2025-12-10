@@ -1,16 +1,13 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text } from "react-native";
 
-const Home = () => {
+export default function Home() {
   return (
-    <View style={{
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+    >
       <Text>Home</Text>
-    </View>
-  )
-}
 
-export default Home
+    </ScrollView>
+
+  );
+}
