@@ -1,21 +1,13 @@
-import { COLORS } from '@/utils/Colors';
-import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
+import { Stack } from 'expo-router'
 
-export default function RootLayout() {
-  return (
-    <NativeTabs blurEffect='systemChromeMaterialLight' tintColor={COLORS.textDark}>
-      <NativeTabs.Trigger name="(home)">
-        <Label>Home</Label>
-        <Icon sf={{ default: 'house', selected: 'house.fill' }} drawable="custom_android_drawable" />
-      </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="(saves)">
-        <Icon sf={{ default: 'heart', selected: 'heart.fill' }} drawable="custom_settings_drawable" />
-        <Label>Saves</Label>
-      </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="(settings)">
-        <Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} drawable="custom_settings_drawable" />
-        <Label>Settings</Label>
-      </NativeTabs.Trigger>
-    </NativeTabs>
-  );
+const RootLayout = () => {
+    return (
+        <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+        </Stack>
+    )
 }
+
+export default RootLayout
