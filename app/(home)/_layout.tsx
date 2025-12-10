@@ -3,7 +3,9 @@ import { Stack } from 'expo-router';
 
 export default function HomeLayout() {
   return (
-    <Stack screenOptions={{ contentStyle: { backgroundColor: COLORS.white } }} >
+    <Stack screenOptions={{
+      contentStyle: { backgroundColor: COLORS.white },
+    }}>
       <Stack.Screen name="index" options={{ title: 'Home', headerLargeTitleEnabled: true, headerLargeTitleShadowVisible: false }} />
     </Stack>
   );

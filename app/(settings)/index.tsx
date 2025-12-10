@@ -1,11 +1,11 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text } from 'react-native'
 
 const Settings = () => {
     return (
-        <View>
+        <ScrollView contentInsetAdjustmentBehavior='automatic'>
             <Text>Settings</Text>
-        </View>
+        </ScrollView>
     )
 }
 
