@@ -1,17 +1,44 @@
-import { COLORS } from '@/utils/Colors'
-import { Image, StyleSheet, Text, View } from 'react-native'
-import { KeyboardAvoidingView } from 'react-native-keyboard-controller'
+import { COLORS } from '@/utils/Colors';
+import { AntDesign } from '@expo/vector-icons';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
 const Page = () => {
     // return <Redirect href={'/(tabs)/(saves)'} />
+
+    const handleSocialLogin = (provider: string) => {
+        console.log('handleSocialLogin', provider)
+    }
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
+            {/* Header */}
             <View style={styles.header}>
                 <View style={styles.logo}>
                     <Image source={require('@/assets/images/pocket-logo.png')} style={styles.logoIcon} />
                 </View>
                 <Text style={styles.title}>Log In</Text>
             </View>
+
+            {/* Button */}
+            <View style={styles.buttonSection}>
+                <TouchableOpacity style={styles.button}
+                    onPress={() => handleSocialLogin("oauth_apple")}>
+                    <AntDesign name="apple" size={20} color="#000" />
+                    <Text style={styles.buttonText}>Continue with Apple</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}
+                    onPress={() => handleSocialLogin("oauth_google")}>
+                    <AntDesign name="google" size={24} color="#000" />
+                    <Text style={styles.buttonText}>Continue with Google</Text>
+                </TouchableOpacity>
+            </View>
+            {/* Divider */}
+            <View style={styles.divider}>
+                <View style={styles.line} />
+                <Text style={styles.orText}>OR</Text>
+                <View style={styles.line} />
+            </View>
+
         </KeyboardAvoidingView>
     )
 }
@@ -41,6 +68,37 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: COLORS.textDark,
     },
+    buttonSection: {
+        gap: 12,
+    },
+    button: {
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingVertical: 16,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 12,
+        borderColor: COLORS.border,
+    },
+    buttonText: {
+        fontSize: 16,
+    },
+    divider: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 30,
+        gap: 8
+    },
+    line: {
+        flex: 1,
+        height: 1,
+        backgroundColor: COLORS.border,
+    },
+    orText: {
+        color: COLORS.textLight,
+        fontSize: 14
+    }
 })
 
 export default Page
