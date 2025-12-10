@@ -1,5 +1,17 @@
-import { Stack } from "expo-router";
+import { COLORS } from '@/utils/Colors';
+import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <NativeTabs tintColor={COLORS.textDark}>
+      <NativeTabs.Trigger name="home">
+        <Label>Home</Label>
+        <Icon sf={{ default: 'house', selected: 'house.fill' }} drawable="custom_android_drawable" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="settings">
+        <Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} drawable="custom_settings_drawable" />
+        <Label>Settings</Label>
+      </NativeTabs.Trigger>
+    </NativeTabs>
+  );
 }
