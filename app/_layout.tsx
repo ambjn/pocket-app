@@ -8,6 +8,10 @@ export default function RootLayout() {
         <Label>Home</Label>
         <Icon sf={{ default: 'house', selected: 'house.fill' }} drawable="custom_android_drawable" />
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="saves">
+        <Icon sf={{ default: 'heart', selected: 'heart.fill' }} drawable="custom_settings_drawable" />
+        <Label>Saves</Label>
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="settings">
         <Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} drawable="custom_settings_drawable" />
         <Label>Settings</Label>
