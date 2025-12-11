@@ -1,11 +1,16 @@
 import { COLORS } from '@/utils/Colors';
 import { AntDesign } from '@expo/vector-icons';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Link } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
+import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
 const Page = () => {
     // return <Redirect href={'/(tabs)/(saves)'} />
 
+    const openLink = () => {
+        WebBrowser.openBrowserAsync('https://www.google.com');
+    };
     const handleSocialLogin = (provider: string) => {
         console.log('handleSocialLogin', provider)
     }
@@ -38,8 +43,56 @@ const Page = () => {
                 <Text style={styles.orText}>OR</Text>
                 <View style={styles.line} />
             </View>
-
-        </KeyboardAvoidingView>
+            {/* Email */}
+            <View style={styles.emailSection}>
+                <TextInput
+                    placeholder="Email"
+                    style={styles.emailInput}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    placeholderTextColor={'#999'}
+                    autoCorrect={false}
+                />
+                <TouchableOpacity style={styles.nextButton}
+                >
+                    <Text style={styles.nextButtonText}>Next</Text>
+                </TouchableOpacity>
+                <Link href={'/(tabs)/(home)'} asChild>
+                    <TouchableOpacity style={{ marginTop: 16, alignSelf: 'center' }}
+                    >
+                        <Text style={{ color: COLORS.secondary, fontWeight: 'bold' }}>Skip for now</Text>
+                    </TouchableOpacity>
+                </Link>
+            </View>
+            {/* Legal */}
+            <View style={styles.footer}>
+                <Text style={styles.termsText}>
+                    By proceeding, you agree to:{'\n'}
+                    Pocket's{' '}
+                    <Text style={styles.link} onPress={() => openLink()}>
+                        Terms of Service
+                    </Text>{' '}
+                    and{' '}
+                    <Text style={styles.link} onPress={() => openLink()}>
+                        Privacy Notice
+                    </Text>
+                    .{'\n'}
+                    Mozilla Accounts{' '}
+                    <Text style={styles.link} onPress={() => openLink()}>
+                        Terms of Service
+                    </Text>{' '}
+                    and{' '}
+                    <Text style={styles.link} onPress={() => openLink()}>
+                        Privacy Notice
+                    </Text>
+                    .
+                </Text>
+                <Button
+                    title="Test Sentry"
+                    onPress={() => { }}
+                />
+            </View>
+        </KeyboardAvoidingView >
     )
 }
 
@@ -98,7 +151,43 @@ const styles = StyleSheet.create({
     orText: {
         color: COLORS.textLight,
         fontSize: 14
-    }
+    },
+    emailSection: {
+        marginBottom: 30,
+    },
+    emailInput: {
+        borderWidth: 2,
+        borderColor: COLORS.primary,
+        borderRadius: 8,
+        padding: 16,
+        fontSize: 16,
+        marginBottom: 16,
+    },
+    nextButton: {
+        backgroundColor: COLORS.secondary,
+        borderRadius: 8,
+        paddingVertical: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    nextButtonText: {
+        color: COLORS.white,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    footer: {
+        marginTop: 20,
+    },
+    termsText: {
+        fontSize: 12,
+        color: COLORS.textGray,
+        textAlign: 'center',
+        lineHeight: 18,
+    },
+    link: {
+        color: COLORS.primary,
+        textDecorationLine: 'underline',
+    },
 })
 
 export default Page
