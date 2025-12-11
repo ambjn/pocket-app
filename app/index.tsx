@@ -1,21 +1,44 @@
 import { COLORS } from '@/utils/Colors';
+import { useSSO } from '@clerk/clerk-expo';
 import { AntDesign } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
 const Page = () => {
-    // return <Redirect href={'/(tabs)/(saves)'} />
+    const { startSSOFlow } = useSSO();
 
     const openLink = () => {
         WebBrowser.openBrowserAsync('https://www.google.com');
     };
-    const handleSocialLogin = (provider: string) => {
-        console.log('handleSocialLogin', provider)
+
+    const handleSocialLogin = async (strategy: 'oauth_google' | 'oauth_apple') => {
+        try {
+            // Start the authentication process by calling `startSSOFlow()`
+            const { createdSessionId, setActive, signIn, signUp } = await startSSOFlow({
+                strategy: strategy,
+            })
+
+            if (createdSessionId) {
+                setActive!({
+                    session: createdSessionId,
+                    navigate: async ({ session }) => {
+                        router.replace('/(tabs)/(home)');
+                    },
+                })
+            } else {
+                // If there is no `createdSessionId`,
+                // there are missing requirements, such as MFA
+            }
+        } catch (err) {
+            // See https://clerk.com/docs/guides/development/custom-flows/error-handling
+            // for more info on error handling
+            console.error(JSON.stringify(err, null, 2))
+        }
     }
     return (
-        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={400}>
             {/* Header */}
             <View style={styles.header}>
                 <View style={styles.logo}>
@@ -57,10 +80,10 @@ const Page = () => {
                 >
                     <Text style={styles.nextButtonText}>Next</Text>
                 </TouchableOpacity>
-                <Link href={'/(tabs)/(home)'} asChild>
+                <Link href={'/(tabs)/(home)'} asChild replace>
                     <TouchableOpacity style={{ marginTop: 16, alignSelf: 'center' }}
                     >
-                        <Text style={{ color: COLORS.secondary, fontWeight: 'bold' }}>Skip for now</Text>
+                        <Text style={{ color: '#4A90E2', fontWeight: 'bold' }}>Skip for now</Text>
                     </TouchableOpacity>
                 </Link>
             </View>
