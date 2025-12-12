@@ -1,7 +1,7 @@
 import { COLORS } from '@/utils/Colors';
 import { useSSO } from '@clerk/clerk-expo';
 import { AntDesign } from '@expo/vector-icons';
-import { Link, router } from 'expo-router';
+import { Link } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
@@ -24,7 +24,7 @@ const Page = () => {
                 setActive!({
                     session: createdSessionId,
                     navigate: async ({ session }) => {
-                        router.replace('/(tabs)/(home)');
+                        // router.replace('/(tabs)/(home)');
                     },
                 })
             } else {
